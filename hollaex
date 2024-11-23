@@ -4569,11 +4569,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
             if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-                hollaex server --build --is_hollaex_setup --kube --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH
+                hollaex server --build --is_hollaex_setup --kube --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH || exit 1 
 
             else 
 
-                hollaex server --build --is_hollaex_setup --kube --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH
+                hollaex server --build --is_hollaex_setup --kube --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH || exit 1 
 
             fi
 
@@ -4581,11 +4581,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
             if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-                hollaex server --build --is_hollaex_setup --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH
+                hollaex server --build --is_hollaex_setup --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH || exit 1 
 
             else 
 
-                hollaex server --build --is_hollaex_setup --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH
+                hollaex server --build --is_hollaex_setup --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} --arch $ENVIORNMENT_HOLLAEX_CPU_ARCH || exit 1 
 
             fi
 
@@ -4597,11 +4597,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
             if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-                hollaex server --build --is_hollaex_setup --kube --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY}
+                hollaex server --build --is_hollaex_setup --kube --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} || exit 1 
 
             else 
 
-                hollaex server --build --is_hollaex_setup --kube --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY}
+                hollaex server --build --is_hollaex_setup --kube --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} || exit 1 
 
             fi
 
@@ -4609,11 +4609,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
             if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-                hollaex server --build --is_hollaex_setup --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY}
+                hollaex server --build --is_hollaex_setup --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} || exit 1 
 
             else 
 
-                hollaex server --build --is_hollaex_setup --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY}
+                hollaex server --build --is_hollaex_setup --skip --registry ${ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY_OVERRIDE:-$ENVIRONMENT_USER_HOLLAEX_CORE_IMAGE_REGISTRY} || exit 1 
 
             fi
 
@@ -4640,11 +4640,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
         if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-            hollaex apply --kube
+            hollaex apply --kube || exit 1 
 
         else 
 
-            hollaex apply --kube --skip
+            hollaex apply --kube --skip || exit 1 
 
         fi
 
@@ -4652,7 +4652,7 @@ elif [[ "$1" == "upgrade" ]]; then
         if [[ "$ENVIRONMENT_KUBERNETES_S3_BACKUP_CRONJOB_ACCESSKEY" ]] && [[ "$ENVIRONMENT_KUBERNETES_S3_BACKUP_CRONJOB_SECRETKEY" ]]; then
 
             echo "Installing PostgreSQL database backup Cronjob..."
-            hollaex toolbox --set_backup_cronjob --kube --skip
+            hollaex toolbox --set_backup_cronjob --kube --skip || exit 1 
 
         fi
 
@@ -4660,11 +4660,11 @@ elif [[ "$1" == "upgrade" ]]; then
 
         if [[ "$RUN_WITH_VERIFY" == true ]]; then 
 
-            hollaex apply
+            hollaex apply || exit 1 
 
         else 
 
-            hollaex apply --skip
+            hollaex apply --skip || exit 1 
 
         fi
 
@@ -5793,13 +5793,13 @@ elif [[ "$1" == "web" ]]; then
 
         if [[ "$USE_KUBERNETES" ]]; then
 
-            hollaex web --build --kube --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION
-            hollaex web --apply --kube --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION
+            hollaex web --build --kube --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION || exit 1
+            hollaex web --apply --kube --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION || exit 1
 
         else 
             
-            hollaex web --build --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION
-            hollaex web --apply --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION
+            hollaex web --build --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION || exit 1
+            hollaex web --apply --skip --registry $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_REGISTRY --tag $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION || exit 1
 
         fi
 
