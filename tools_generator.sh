@@ -5079,7 +5079,7 @@ function run_and_upgrade_hollaex_on_kubernetes() {
       echo "Waiting until the database to be fully initialized"
       sleep 60
       
-  else
+  elif [[ "$ENVIRONMENT_KUBERNETES_RUN_POSTGRESQL_DB" == true ]]; then
 
     kubectl scale -n $ENVIRONMENT_EXCHANGE_NAME deployment/$ENVIRONMENT_EXCHANGE_NAME-db --replicas=0
 
