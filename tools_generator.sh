@@ -5081,10 +5081,6 @@ function run_and_upgrade_hollaex_on_kubernetes() {
       
   elif [[ "$ENVIRONMENT_KUBERNETES_RUN_POSTGRESQL_DB" == true ]]; then
 
-    kubectl scale -n $ENVIRONMENT_EXCHANGE_NAME deployment/$ENVIRONMENT_EXCHANGE_NAME-db --replicas=0
-
-    sleep 10
-
     helm upgrade $ENVIRONMENT_EXCHANGE_NAME-db \
                 --namespace $ENVIRONMENT_EXCHANGE_NAME \
                 --reuse-values \
@@ -5093,10 +5089,7 @@ function run_and_upgrade_hollaex_on_kubernetes() {
                 --set resources.limits.memory="${ENVIRONMENT_POSTGRESQL_MEMORY_LIMITS:-200Mi}" \
                 --set resources.requests.cpu="${ENVIRONMENT_POSTGRESQL_CPU_REQUESTS:-10m}" \
                 --set resources.requests.memory="${ENVIRONMENT_POSTGRESQL_MEMORY_REQUESTS:-100Mi}" \
-                --set stable.replicaCount="1" \
                 $HOLLAEX_CLI_INIT_PATH/server/tools/kubernetes/helm-chart/hollaex-kit-postgres
-    
-    kubectl scale -n $ENVIRONMENT_EXCHANGE_NAME deployment/$ENVIRONMENT_EXCHANGE_NAME-db --replicas=1
 
   fi
         
