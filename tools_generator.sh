@@ -5087,11 +5087,7 @@ function run_and_upgrade_hollaex_on_kubernetes() {
 
     helm upgrade $ENVIRONMENT_EXCHANGE_NAME-db \
                 --namespace $ENVIRONMENT_EXCHANGE_NAME \
-                --wait \
-                --set pvc.create=true \
-                --set pvc.name="$ENVIRONMENT_EXCHANGE_NAME-postgres-volume" \
-                --set pvc.size="$ENVIRONMENT_KUBERNETES_POSTGRESQL_DB_VOLUMESIZE" \
-                --set secretName="$ENVIRONMENT_EXCHANGE_NAME-secret" \
+                --reuse-values \
                 --set resources.limits.cpu="${ENVIRONMENT_POSTGRESQL_CPU_LIMITS:-100m}" \
                 --set resources.limits.memory="${ENVIRONMENT_POSTGRESQL_MEMORY_LIMITS:-200Mi}" \
                 --set resources.requests.cpu="${ENVIRONMENT_POSTGRESQL_CPU_REQUESTS:-10m}" \
