@@ -5169,7 +5169,11 @@ function run_and_upgrade_hollaex_on_kubernetes() {
 
     fi
 
-  else 
+  elif [[ "$ENVIRONMENT_HOLLAEX_SCALEING" == true ]]; then
+
+    echo "Skip running db upgrade."
+
+  else
 
     # Running database job for Kubernetes
     kubernetes_database_init upgrade;

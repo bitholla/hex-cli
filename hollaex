@@ -2907,7 +2907,7 @@ elif [[ "$1" == "scale" ]]; then
 
     
 
-     source $SCRIPTPATH/tools_generator.sh
+    source $SCRIPTPATH/tools_generator.sh
 
     for i in ${CONFIG_FILE_PATH[@]}; do
         source $i
@@ -2928,7 +2928,27 @@ elif [[ "$1" == "scale" ]]; then
         export ENVIRONMENT_KUBERNETES_GENERATE_CONFIGMAP_ENABLE=false
         export ENVIRONMENT_KUBERNETES_GENERATE_SECRET_ENABLE=false 
         
-    fi 
+    fi
+
+    if [[ ! "$RUN_WITH_VERIFY" == true ]]; then 
+
+
+        if [[ "$USE_KUBERNETES" ]]; then
+
+            run_and_upgrade_hollaex_on_kubernetes;
+
+            hollaex web --apply --kube --skip
+
+        else
+
+            echo "Error: The '--skip' flag is not supported for 'hollaex server --scale".
+            exit 1;
+
+
+        fi 
+
+
+    fi
 
      # Target filtering
 
