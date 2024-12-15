@@ -2937,7 +2937,6 @@ elif [[ "$1" == "scale" ]]; then
 
             run_and_upgrade_hollaex_on_kubernetes;
 
-            hollaex web --apply --kube --skip
 
         else
 
