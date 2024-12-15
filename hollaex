@@ -351,6 +351,10 @@ if [[ "$1" == "dev" ]]; then
                 echo 'Local mocha code test mode enabled.'
                 shift; continue
                 ;;
+            --scale)
+                HOLLAEX_DEV_SCALE=true
+                shift; continue
+                ;;
             --skip)
                 RUN_WITH_VERIFY=false
                 echo 'Skipping the command confirmation.'
@@ -5000,11 +5004,6 @@ elif [[ "$1" == "web" ]]; then
                 case $1 in (-*|"") err_msg_l; print_usage; exit 1; esac
                 export ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION_OVERRIDE=$1
                 echo "Target hollaex web image tag : $ENVIRONMENT_USER_HOLLAEX_WEB_IMAGE_VERSION_OVERRIDE."
-                shift; continue
-                ;;
-            # Scale related
-            --scale)
-                WEB_CLIENT_SCALE=true
                 shift; continue
                 ;;
             --replicas)
