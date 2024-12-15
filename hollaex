@@ -2940,6 +2940,7 @@ elif [[ "$1" == "scale" ]]; then
         if [[ "$USE_KUBERNETES" ]]; then
 
             run_and_upgrade_hollaex_on_kubernetes;
+            exit 0;
 
 
         else
