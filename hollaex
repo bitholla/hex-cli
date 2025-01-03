@@ -4327,6 +4327,22 @@ elif [[ "$1" == "apply" ]]; then
     cli_resource_generation_checker;
 
     load_config_variables;
+
+    # Randomly generates backend passwords
+    if [[ ! "$HOLLAEX_SECRET_REDIS_PASSWORD" ]] || [[ ! "$HOLLAEX_SECRET_PUBSUB_PASSWORD" ]] || [[ ! "$HOLLAEX_SECRET_DB_PASSWORD" ]] ; then
+    
+        echo -e "\033[91m\nError: Your Database passwords are missing!\033[39m"
+        echo -e "Please check your settings/secret file to ensure all values are set."
+        echo -e "\nThe apply procedure has been exited due to a failsafe."
+
+        echo -e "\nKeys to check:"
+        echo -e "- HOLLAEX_SECRET_REDIS_PASSWORD"
+        echo -e "- HOLLAEX_SECRET_PUBSUB_PASSWORD"
+        echo -e "- HOLLAEX_SECRET_DB_PASSWORD\n"
+
+        exit 1;
+
+    fi
     
 
     #kit_cross_compatibility_converter;
