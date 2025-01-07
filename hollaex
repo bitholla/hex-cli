@@ -118,8 +118,6 @@ if [[ ! "$HOLLAEX_NETWORK_OPERATION" ]]; then
 
     fi
 
-    source $SCRIPTPATH/version_range
-
 fi
 
 check_git_conflict() {
@@ -2594,19 +2592,6 @@ elif [[ "$1" == "start" ]]; then
     # exchange initialization status check & disables resource generation
     cli_resource_generation_checker;
 
-    #kit_cross_compatibility_converter;
-
-    # if [[ ! "$IGNORE_COMPATIBILITY_CHECK" ]]; then 
-
-    #     if [[ ! "$HOLLAEX_NETWORK_START" ]]; then 
-
-    #         # Check Kit version compatibility range.
-    #         check_kit_version_compatibility_range;
-        
-    #     fi 
-    
-    # fi 
-
     if [[ "$IGNORE_SETTINGS" ]]; then
 
         export ENVIRONMENT_DOCKER_COMPOSE_GENERATE_ENV_ENABLE=false
@@ -3802,19 +3787,6 @@ elif [[ "$1" == "stop" ]]; then
     source $SCRIPTPATH/tools_generator.sh
     load_config_variables;
 
-    #kit_cross_compatibility_converter;
-
-    # if [[ ! "$IGNORE_COMPATIBILITY_CHECK" ]]; then 
-
-    #     if [[ ! "$HOLLAEX_NETWORK_STOP" ]]; then 
-
-    #         # Check Kit version compatibility range.
-    #         check_kit_version_compatibility_range;
-        
-    #     fi 
-    
-    # fi 
-
     if [[ "$USE_KUBERNETES" ]]; then
         
 
@@ -4564,24 +4536,6 @@ elif [[ "$1" == "upgrade" ]]; then
         # Update HollaEx CLI to latest if there is newer release available.
         update_hollaex_cli_to_latest;
 
-        echo "Checking the version compatibility between the latest HollaEx CLI and your local Kit..."
-        if command curl -s -f https://raw.githubusercontent.com/bitholla/hollaex-cli/master/version_range > $SCRIPTPATH/.master_version_range; then 
-
-            source $SCRIPTPATH/.master_version_range
-            rm $SCRIPTPATH/.master_version_range
-
-        else 
-
-            printf "\n\033[91mError: Failed to read latest version compatibility range from the server.\n\033[39m"
-            echo "Please check your internet connectivity and try it again."
-            
-            exit 1;
-
-        fi
-
-        # Check Kit version compatibility range.
-        # check_kit_version_compatibility_range;
-
     fi
 
     #hollaex build
@@ -4771,19 +4725,6 @@ elif [[ "$1" == "terminate" ]]; then
 
     source $SCRIPTPATH/tools_generator.sh
     load_config_variables;
-
-    #kit_cross_compatibility_converter;
-
-    # if [[ ! "$IGNORE_COMPATIBILITY_CHECK" ]]; then 
-
-    #     if [[ ! "$HOLLAEX_NETWORK_TERMINATE" ]]; then 
-
-    #         # Check Kit version compatibility range.
-    #         check_kit_version_compatibility_range;
-        
-    #     fi
-    
-    # fi 
 
     echo -e "\n# # # # # #  \033[1mW A R N I N G\033[0m  # # # # # #\n"
     echo -e "\033[91mYou are now trying to TERMINATE your exchange!\033[39m"
